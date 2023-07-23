@@ -1,0 +1,43 @@
+\documentclass[oneside, a4paper, 12pt]{amsart}
+\usepackage[type=paper, externalize=false, font=libertine]{styles/style}
+
+\usepackage[a4paper, margin=3cm]{geometry}
+\pdfoutput=1
+
+\usepackage{lipsum}
+
+\bibliography{bibliography}
+
+\title{Example Document Title}
+
+\begin{document}
+
+\begin{abstract}
+  \lipsum[1]
+\end{abstract}
+
+\maketitle
+
+\microtypesetup{protrusion=false}
+\tableofcontents
+\microtypesetup{protrusion=true}
+
+\numberwithin{Theorem}{section}
+
+\section{Section}
+
+\lipsum[2]
+\cite{MacLane1998}
+
+\subsection{Subsection}
+
+\lipsum[3]
+
+\printbibliography
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

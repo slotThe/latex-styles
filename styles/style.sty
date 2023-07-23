@@ -1,0 +1,501 @@
+% `M-x occur %%% RET' gives a good overview.
+
+%%% Options
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{style}
+\RequirePackage{kvoptions}
+
+\SetupKeyvalOptions{family=ST,prefix=ST@}
+
+\DeclareStringOption[paper]{type}
+\edef\DocType{\ST@type}
+\newcommand*{\ST@paper}{paper}
+\newcommand*{\ST@beamer}{beamer}
+\newcommand*{\ST@poster}{poster}
+\newcommand*{\ST@org}{org}
+
+\DeclareBoolOption{externalize}
+\DeclareComplementaryOption{noext}{externalize}
+
+\DeclareStringOption[libertine]{font}
+\edef\DocFont{\ST@font}
+\newcommand*{\ST@lib}{libertine}
+\newcommand*{\ST@cm}{computer-modern}
+
+\DeclareBoolOption{sidenotes}
+\DeclareComplementaryOption{footnotes}{sidenotes}
+
+\ProcessKeyvalOptions*
+
+%%% Packages
+
+%%%% Util
+\usepackage{ifthen}
+\usepackage{xparse}     % Build more complicated macros
+\usepackage{etoolbox}
+\usepackage{environ}    % Define environments
+
+%%%% Maths
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bussproofs}
+\usepackage{cmll}       % \parr
+\usepackage{bbold}
+\usepackage{leftidx}    % good-looking left super-/subscripts
+\usepackage{scalerel}   % \scaleobj
+\usepackage{faktor}     % A/I
+
+%%%% Typesetting
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[tracking=true]{microtype}
+\SetTracking   % Slightly space out small caps
+  {encoding=T1, shape=sc}
+  {20}
+\SetProtrusion % Protrude sub- and superscripts at the right margin
+  {encoding=T1,size={7,8}}
+  {1={ ,750},2={ ,500},3={ ,500},4={ ,500},5={ ,500},
+    6={ ,500},7={ ,600},8={ ,500},9={ ,500},0={ ,500}}
+%%%%% Font choice
+\ifx\ST@font\ST@lib
+  \usepackage[ttscale=.85]{libertine}
+  \usepackage{libertinust1math}
+\else
+  \usepackage{lmodern}
+\fi
+
+%%%% Language
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{CJKutf8}           % よ for the Yoneda embedding
+\usepackage{epigraph}
+
+%%%% Misc
+\usepackage{graphicx}          % include graphics in the document
+\usepackage{caption}           % captions outside of float environments
+\usepackage{subfiles}
+\usepackage{xspace}
+\ifthenelse{\equal\ST@type\ST@beamer \OR \equal\ST@type\ST@poster}{
+  \usepackage{qrcode}
+}{}
+\ifthenelse{\NOT\equal\ST@type\ST@beamer}{  % beamer doesn't like these
+  \usepackage{enumitem}
+}{
+  \usepackage{appendixnumberbeamer}
+}
+
+%%%% Hyphenation
+\usepackage{hyphenat}
+\hyphenation{auto-nomous}
+
+%%%% Todonotes
+\setlength{\marginparwidth}{2.5cm}
+\usepackage[ colorinlistoftodos  %
+           , prependcaption      %
+           , textsize=tiny       %
+           , textwidth=2.5cm     %
+           , bordercolor=black!0 %
+           ] {todonotes}
+\tikzset{/tikz/notestyleraw/.append style={rounded corners=2pt, font=sffamily}}
+\definecolor{tdstylecol}{rgb}{0.0, 0.7, 1.0}
+\newcommand{\hsc}[1]{{\textsf{\footnotesize\MakeUppercase{#1}}}}
+\newcommand{\tdref}[2][]{\todo[color=yellow, textcolor=black, #1]{\hsc{Ref:} #2}}
+\newcommand{\tdmissing}[2][]{\todo[color=orange!80, #1]{\hsc{Missing:} #2}}
+\newcommand{\tdnote}[2][]{\todo[color=tdstylecol!20, #1]{\hsc{Note:} #2}}
+\newcommand{\tdproof}[1][]{\tdmissing[#1]{proof}}
+\newcommand{\tdstyle}[2][]{\todo[color=tdstylecol!20, #1]{\hsc{Style:} #2}}
+
+%%%% TikZ
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usetikzlibrary{
+  backgrounds,
+  calc,
+  cd,
+  fit,
+  scopes,
+  intersections,
+  pgfplots.fillbetween,
+  arrows.meta,
+  decorations.text,
+  decorations.markings
+}
+\ifthenelse{\NOT\equal\ST@type\ST@org}{
+  \usepackage{styles/quiver}        % q.uiver.app
+  \usepackage{styles/tikzit}
+  \input{styles/tikzit.tikzstyles}
+  \newcommand{\inputtikz}[1]{%
+    \ifST@externalize
+      \tikzsetnextfilename{#1}%
+    \fi
+    \tikzfig{#1}%
+  }
+}{}
+
+%%%%% Externalisation
+\ifST@externalize
+  \usetikzlibrary{external}
+  \tikzexternalize[prefix=figures-ext/]
+  \usepackage{styles/externalise}
+  \ifx\ST@type\ST@beamer
+    \tikzset{external/only named=true}
+  \fi
+\else
+  % Create some dummy commands so the `externalize' and `noext' options
+  % are as bidirectional as possible.
+  \newcommand*{\tikzexternalexportnextfalse}{}
+  \newcommand*{\tikzsetnextfilename}[1]{}
+  \def\temp{&} \catcode`&=\active \let&=\temp
+  \NewEnviron{mytikzcd}[1][]{%
+    \begin{tikzcd}[#1]
+      \BODY
+    \end{tikzcd}
+  }
+\fi
+
+% Hyperref needs to be the last package imported more often than not for
+% evil reasons.
+\ifx\ST@type\ST@paper
+  \definecolor{blue}{rgb}{0.38, 0.51, 0.71}
+  \definecolor{red}{RGB}{175, 49, 39}
+  \definecolor{green}{RGB}{146, 227, 95}
+  \usepackage[ colorlinks
+             , linktoc=page
+             , linkcolor={red}
+             , citecolor={green!65!black}
+             , urlcolor={blue}
+             ]{hyperref}
+\fi
+
+%%% Sidenotes
+\ifx\ST@type\ST@paper
+  \usepackage{sidenotes}
+  \ifST@sidenotes
+    \usepackage{mparhack}
+    \newcommand*{\sidenotesize}{\@setfontsize\sidenotesize{8}{9}}
+    \newcommand{\sn}[1]{
+      \sidenote{%
+        \sidenotesize
+        % TODO: do we want this?
+        \checkoddpage
+        \ifoddpage
+          \raggedright
+        \else
+          \raggedleft
+        \fi
+        {#1}%
+      }%
+    }
+  \fi
+\fi
+
+%%% Environments
+
+%%%% Saner equation numbering
+\ifx\ST@type\ST@paper
+  \numberwithin{equation}{section}
+  \renewcommand{\theequation}{\thesection.\arabic{equation}}
+\fi
+
+%%%% More pronounced emphasis in poster
+\ifx\ST@type\ST@poster
+  \let\emph\relax               % there is no \RedeclareTextFontCommand
+  \DeclareTextFontCommand{\emph}{\bfseries}
+\fi
+
+%%%% Maths environments
+\ifthenelse{\NOT\equal\ST@type\ST@org}{
+  \theoremstyle{plain}
+  \ifthenelse{\equal\ST@type\ST@paper \OR \equal\ST@type\ST@poster}{
+    \newtheorem{Theorem}{Theorem}
+    \newtheorem{Lemma}[Theorem]{Lemma}
+    \newtheorem{Corollary}[Theorem]{Corollary}
+    \newtheorem{Proposition}[Theorem]{Proposition}
+  }{}
+  \newtheorem*{Proposition*}{Proposition}
+  \newtheorem*{Conjecture}{Conjecture}
+
+  \theoremstyle{definition}
+  \ifthenelse{\equal\ST@type\ST@paper \OR \equal\ST@type\ST@poster}{
+    \newtheorem*{Theorem*}{Theorem}
+    \newtheorem{Definition}[Theorem]{Definition}
+    \newtheorem*{Definition*}{Definition}
+    \newtheorem{Example}[Theorem]{Example}
+    \newtheorem{Remark}[Theorem]{Remark}
+    \newtheorem{Notation}[Theorem]{Notation}
+    \newtheorem{question}[Theorem]{Question}
+  }{}
+  \newtheorem*{Question*}{Question}
+  \newtheorem*{Remark*}{Remark}
+  \newtheorem*{Convention}{Convention}
+}{}
+
+%%% Commands
+
+%%% Abbreviations
+\newcommand*{\eg}{e.g.,\xspace}
+\newcommand*{\ie}{i.e.,\xspace}
+
+%%%% Names
+\newcommand*{\Grothendieck}{Grothendieck\xspace}
+\newcommand*{\EM}{Eilenberg--Moore\xspace}
+\newcommand*{\YetterDrinfeld}{Yetter--Drinfeld}
+\newcommand*{\Moerdijk}{Moerdijk\xspace}
+\newcommand*{\Brugieres}{Brugui\`eres\xspace}
+\newcommand*{\Virelizier}{Virelizier\xspace}
+\newcommand*{\Turaev}{Turaev\xspace}
+\newcommand*{\GV}{Grothendieck--Verdier\xspace}
+
+%%%% Long Arrows
+\ifx\ST@font\ST@lib
+  % Add a little bit of negative space for libertine.
+  \renewcommand{\colon}{\!\nobreak\mskip2mu\mathpunct{}\nonscript%
+    \mkern-\thinmuskip{:}\mskip6muplus1mu\relax%
+  }
+\fi
+\newcommand{\from}{\colon}
+\newcommand*{\trightarrow}[1]{\xrightarrow{#1}}
+\newcommand*{\nt}{\Longrightarrow}
+\newcommand*{\longhookrightarrow}{\lhook\joinrel\longrightarrow}
+\newcommand*{\longtwoheadrightarrow}{\relbar\joinrel\twoheadrightarrow}
+\renewcommand*{\to}{\longrightarrow}
+\renewcommand*{\mapsto}{\longmapsto}
+\newcommand*{\inj}{\longhookrightarrow}
+\newcommand*{\emb}{\longhookrightarrow}
+\newcommand*{\sur}{\longtwoheadrightarrow}
+\newcommand*{\proj}{\longtwoheadrightarrow}
+\ifx\ST@font\ST@lib
+  \newcommand*{\iso}{%
+    \overset{\smash{\raisebox{-0.65ex}{\ensuremath{\scriptstyle\sim}}}%
+                   \,}%
+            {\to}%
+  }
+\else
+  \newcommand*{\iso}{%
+    \overset{\smash{\raisebox{-0.55ex}{\ensuremath{\scriptstyle\sim}}}%
+                   \,}%
+            {\to}%
+  }
+\fi
+
+\ifx\ST@font\ST@cm
+  % There is no 12pt symbols font for computer-modern, so
+  % \Longrightarrow looks bad there; fix this.
+  \DeclareFontFamily{OT1}{cmrx}{}
+  \DeclareFontShape{OT1}{cmrx}{m}{n}{<->cmr10}{}
+  \let\saveLongrightarrow\Longrightarrow
+  \makeatletter
+  \renewcommand*{\Longrightarrow}{%
+    \mathrel{\rlap{\fontfamily{cmrx}\fontencoding{OT1}\selectfont=}%
+      \hphantom{\saveLongrightarrow}%
+      \llap{$\m@th\Rightarrow$}}}
+  \makeatother
+\fi
+
+%%%% Categories
+\DeclareMathOperator*{\Ob}{Ob}
+\DeclareMathOperator*{\Mor}{Mor}
+\DeclareMathOperator*{\Nat}{Nat}
+
+\newcommand*{\cat}[1]{\ensuremath{\mathcal{#1}}} % A category
+\newcommand*{\cc}{\cat{C}\xspace}
+\newcommand*{\dd}{\cat{D}\xspace}
+\newcommand*{\ee}{\cat{E}\xspace}
+\newcommand*{\mm}{\cat{M}\xspace}
+\newcommand*{\nn}{\cat{N}\xspace}
+
+\newcommand*{\ConcreteCat}[1]{\ensuremath{\mathsf{#1}}\xspace}
+\newcommand*{\Set}{\ConcreteCat{Set}}
+\newcommand*{\Vect}{\ConcreteCat{Vect}}
+\newcommand*{\vect}{\ConcreteCat{vect}}
+\newcommand{\Cat}{\ConcreteCat{Cat}}
+\newcommand*{\MCCat}{\ConcreteCat{MCCat}}
+\newcommand*{\mky}{\ConcreteCat{Mky}}
+\newcommand*{\mkyfin}{\ConcreteCat{mky}}
+\newcommand*{\Ab}{\ConcreteCat{Ab}}
+\newcommand*{\kvect}{\ensuremath{\mathsf{vect}_{\k}}}
+\newcommand*{\kVect}{\ensuremath{\mathsf{Vect}_{\k}}}
+\newcommand*{\Sp}[1]{\ensuremath{\mathsf{Sp}_{#1}}\xspace}
+\newcommand*{\Gset}[1][G]{\ensuremath{{#1}\text{-}\mathsf{set}}\xspace}
+
+%%%% Centres
+\NewDocumentCommand{\buildCenter}{m o o m o}{
+  \IfBooleanTF{#1}
+    {\ensuremath{\mathcal{#2}({}_{\mathsf #3}{#4}_{\mathsf #5})}\xspace}
+    {\ensuremath{\mathcal{#2}({}_{\mathsf #3}{\cat{#4}}_{\mathsf #5})}\xspace}
+}
+\NewDocumentCommand{\cent}{s O{} m O{}}{\buildCenter{#1}[Z][#2]{#3}[#4]}
+\newcommand*{\tcf}[2]{\buildCenter*[Z]{#1}[#2]}
+\newcommand*{\tc}[1]{\tcf{#1}{T}}
+
+%%%% Modules
+\newcommand*{\lmod}[1]{#1\textnormal{-Mod}}
+\newcommand*{\YDM}[1]{\ensuremath{{}^{#1}_{#1}\mathcal{YD}}\xspace}
+\newcommand*{\bm}[3]{\ensuremath{{}_{#2}#1_{#3}}}
+\newcommand*{\ltw}[2]{\bm{#1}{\Id_{#1}}{#2}}
+\newcommand*{\lcomod}[2]{\ensuremath{\leftidx{^{#1}}{\! #2}{}}}
+
+\newcommand*{\lact}{\mathchoice
+    {\raisebox{0.065 em}{\,\scaleobj{0.75}{\rhd}}\,}% \displaystyle
+    {\raisebox{0.065 em}{\,\scaleobj{0.75}{\rhd}}\,}% \textstyle
+    {\raisebox{0.04 em}{\scaleobj{0.5}{\rhd}}}%       \scriptstyle
+    {\raisebox{0.043 em}{\scaleobj{0.33}{\rhd}}}%     \scriptscriptstyle
+}
+\newcommand*{\ract}{\mathchoice
+    {\raisebox{0.065 em}{\,\scaleobj{0.75}{\lhd}}\,}%
+    {\raisebox{0.065 em}{\,\scaleobj{0.75}{\lhd}}\,}%
+    {\raisebox{0.04 em}{\scaleobj{0.5}{\lhd}}}%
+    {\raisebox{0.043 em}{\scaleobj{0.33}{\lhd}}}%
+}
+\newcommand*{\blact}{\mathchoice
+    {\raisebox{0.065 em}{\scaleobj{0.75}{\blacktriangleright}}}%
+    {\raisebox{0.065 em}{\scaleobj{0.75}{\blacktriangleright}}}%
+    {\raisebox{0.04 em}{\scaleobj{0.5}{\blacktriangleright}}}%
+    {\raisebox{0.043 em}{\scaleobj{0.33}{\blacktriangleright}}}%
+}
+\newcommand*{\bract}{\mathchoice
+    {\raisebox{0.065 em}{\scaleobj{0.75}{\blacktriangleleft}}}%
+    {\raisebox{0.065 em}{\scaleobj{0.75}{\blacktriangleleft}}}%
+    {\raisebox{0.04 em}{\scaleobj{0.5}{\blacktriangleleft}}}%
+    {\raisebox{0.043 em}{\scaleobj{0.33}{\blacktriangleleft}}}%
+ }
+
+%%%% Monads
+\newcommand*{\monad}[1]{\ensuremath{(#1, \mu^{#1}, \eta^{#1})}\xspace}
+\newcommand*{\stdmonad}{\monad{T}}
+\newcommand*{\dmonad}{\ensuremath{S \circ_{\Omega} T}\xspace}
+
+%%%% Heaps
+\DeclareMathOperator{\pic}{Pic}
+\DeclareMathOperator{\qpiv}{QPiv}
+
+%%%% Arrows
+\newcommand*{\id}{\mathrm{id}} % id function
+\newcommand*{\Id}{\mathrm{Id}} % id functor
+\renewcommand{\hom}[2]{\operatorname{Hom}_{#1}\left(#2\right)}
+\newcommand*{\homf}[3]{#1 \colon #2^{\op} \times #2 \to #3}
+\newcommand*{\compf}[3]{\ensuremath{K \colon \mathcal{#1} \to \mathcal{#2}^{#3}}}
+\newcommand*{\yo}{\text{\begin{CJK}{UTF8}{min}よ\end{CJK}}} % Yoneda embedding
+
+%%%% Adjunctions
+\newcommand*{\adj}[4]{\ensuremath{#1 \colon #3 \rightleftarrows #4 \cocolon #2}\xspace}
+% TODO: Make a \longrightleftarrows version
+\newcommand*{\stdadj}{\adj{F}{U}{\cc}{\dd}}
+
+\ifthenelse{\equal\ST@type\ST@poster \OR \equal\ST@type\ST@beamer}{
+  \newcommand*{\adjspace}{\;}
+}{
+  \newcommand*{\adjspace}{\,}
+}
+\newcommand*{\adjoint}{\adjspace\dashv\adjspace}  % L ⊣ R
+\newcommand*{\lad}{\adjoint}
+\newcommand*{\radjoint}{\adjspace\vdash\adjspace} % L ⊢ R
+\newcommand*{\rad}{\radjoint}
+
+%%%% Duals
+\newcommand*{\ld}[1]{\leftidx{^\vee}{\!#1}{}}     % normal left  dual
+\newcommand*{\rd}[1]{{#1}^\vee}                   % normal right dual
+\newcommand*{\lld}[1]{\leftidx{^{\vee\vee}}{\!#1}{}} % left  double dual
+\newcommand*{\rrd}[1]{{#1}^{\vee\vee}}               % right double dual
+\newcommand*{\ev}{\mathrm{ev}}          %   evaluation of the left  dual
+\newcommand*{\evr}{\widetilde{\ev}}     %   evaluation of the right dual
+\newcommand*{\coev}{\mathrm{coev}}      % coevaluation of the left  dual
+\newcommand*{\coevr}{\widetilde{\coev}} % coevaluation of the right dual
+\newcommand*{\ldual}[1]{(\ld{#1}, \ev_{#1}, \coev_{#1})}
+\newcommand*{\rdual}[1]{(\rd{#1}, \evr_{#1}, \coevr_{#1})}
+
+%%%% Natural transformations
+\newcommand*{\dinat}[1]{\ensuremath{\mathrm{DINAT}\left(#1\right)}\xspace}
+\newcommand{\din}
+  {\mathrel{%
+    \tikzsetnextfilename{DIEEXBUUEH6Z6VP3}
+    \begin{tikzpicture}[baseline=-0.58ex]
+    \begin{scope}[line cap=round, thin]
+    \draw[yshift=-.25mm] (0,0) -- (-.450,0);  % 0.275
+    \draw[yshift= .25mm] (0,0) -- (-.450,0);
+    \end{scope}
+    \filldraw[ rounded corners=.25pt
+             , thin
+             , rotate around={45:(0,0)}
+             , fill=white
+             ] (-.60mm,-.60mm) rectangle (.60mm,.60mm); % 0.45
+    \end{tikzpicture}%
+  }}
+
+%%%% Numbers
+\newcommand*{\real}{\mathbf{R}}
+\newcommand*{\nat}{\mathbf{N}}
+\newcommand*{\rat}{\mathbf{Q}}
+\newcommand*{\complex}{\mathbf{C}}
+\newcommand*{\integer}{\mathbf{Z}}
+
+%%%% Misc
+\newcommand{\mathscale}[2]{\scalebox{#1}{\mbox{\ensuremath{\displaystyle #2}}}}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\op}{op}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\colim}{colim}
+\newcommand*{\blank}{{-}}
+\newcommand*{\ox}{\otimes}
+\newcommand*{\oxo}{\ox^{\op}}
+\newcommand*{\tensorop}{\oxo}
+\newcommand*{\bact}{\blacktriangleright}     % black action
+\ifx\ST@type\ST@poster
+  \renewcommand*{\k}{\ensuremath{\mathsf{k}}\xspace}
+\else
+  \renewcommand*{\k}{\ensuremath{\mathtt{k}}\xspace}
+\fi
+
+% Proper ≔
+\ifx\ST@type\ST@poster
+  \newcommand*{\defeq}{\coloneq}
+\else
+  \newcommand*{\defeq}{\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
+        \hbox{\scriptsize.}\hbox{\scriptsize.}}}%
+    =}
+\fi
+
+% Like \colon, but for the other side.
+\ifx\ST@font\ST@lib
+  \newcommand{\ST@colon}{:\!}
+\else
+  \newcommand{\ST@colon}{:}
+\fi
+\newcommand*{\cocolon}{%
+  \nobreak
+  \mskip6mu plus1mu
+  \mathpunct{}%
+  \nonscript
+  \mkern-\thinmuskip
+  {\ST@colon}%
+  \mskip2mu
+  \relax
+}
+
+% [1]_1,...,[1]_n
+\newcommand*{\set}[1]{\{ \seq{#1} \}}
+\newcommand*{\seq}[1]{\seqaux#1\relax}
+\def\seqaux#1#2#3\relax{%
+       {#1}#2 1,
+    \ifnum\pdfstrcmp{#3}{3}=0
+      {#1}#2 2
+    \else
+      \ldots
+    \fi
+    , {#1}#2{#3}
+}
+\newcommand*{\setnat}[1]{\{1,\ldots,#1 \}} % {1,...,[#1]}
+
+%%% Bibliography
+\ifthenelse{\NOT\equal\ST@type\ST@org}{
+  \usepackage[ backend=bibtex
+             , maxnames=4
+             , maxalphanames=4
+             , style=alphabetic
+             , citestyle=alphabetic
+             ]{biblatex}
+  \def\bibfont{\footnotesize}
+}{}
+
+\endinput
