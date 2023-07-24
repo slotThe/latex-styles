@@ -204,6 +204,12 @@
   \DeclareTextFontCommand{\emph}{\bfseries}
 \fi
 
+%%%% Remove certain items from the table of contents.
+% E.g.:
+%       \addtocontents{toc}{\SkipTocEntry}
+%       \subsection*{Acknowledgements}
+\DeclareRobustCommand{\SkipTocEntry}[5]{}
+
 %%%% Maths environments
 \ifthenelse{\NOT\equal\ST@type\ST@org}{
   \theoremstyle{plain}
