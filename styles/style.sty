@@ -214,27 +214,28 @@
 \ifthenelse{\NOT\equal\ST@type\ST@org}{
   \theoremstyle{plain}
   \ifthenelse{\equal\ST@type\ST@paper \OR \equal\ST@type\ST@poster}{
-    \newtheorem{Theorem}{Theorem}
-    \newtheorem{Lemma}[Theorem]{Lemma}
-    \newtheorem{Corollary}[Theorem]{Corollary}
-    \newtheorem{Proposition}[Theorem]{Proposition}
+    \newtheorem{theorem}{Theorem}
+    \newtheorem{lemma}[theorem]{Lemma}
+    \newtheorem{corollary}[theorem]{Corollary}
+    \newtheorem{proposition}[theorem]{Proposition}
   }{}
-  \newtheorem*{Proposition*}{Proposition}
-  \newtheorem*{Conjecture}{Conjecture}
+  \newtheorem*{proposition*}{Proposition}
+  \newtheorem*{conjecture}{Conjecture}
 
   \theoremstyle{definition}
   \ifthenelse{\equal\ST@type\ST@paper \OR \equal\ST@type\ST@poster}{
-    \newtheorem*{Theorem*}{Theorem}
-    \newtheorem{Definition}[Theorem]{Definition}
-    \newtheorem*{Definition*}{Definition}
-    \newtheorem{Example}[Theorem]{Example}
-    \newtheorem{Remark}[Theorem]{Remark}
-    \newtheorem{Notation}[Theorem]{Notation}
-    \newtheorem{question}[Theorem]{Question}
+    \newtheorem*{theorem*}{Theorem}
+    \newtheorem{definition}[theorem]{Definition}
+    \newtheorem*{definition*}{Definition}
+    \newtheorem{example}[theorem]{Example}
+    \newtheorem{exercise}[theorem]{Exercise}
+    \newtheorem{remark}[theorem]{Remark}
+    \newtheorem{notation}[theorem]{Notation}
+    \newtheorem{question}[theorem]{Question}
   }{}
-  \newtheorem*{Question*}{Question}
-  \newtheorem*{Remark*}{Remark}
-  \newtheorem*{Convention}{Convention}
+  \newtheorem*{question*}{Question}
+  \newtheorem*{remark*}{Remark}
+  \newtheorem*{convention}{Convention}
 }{}
 
 %%% Commands
