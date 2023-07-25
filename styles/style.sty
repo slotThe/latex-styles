@@ -37,7 +37,6 @@
 \usepackage{environ}    % Define environments
 
 %%%% Maths
-\usepackage{amsthm}
 \usepackage{mathtools}
 \usepackage{bussproofs}
 \usepackage{cmll}       % \parr
@@ -154,8 +153,16 @@
   }
 \fi
 
-% Hyperref needs to be the last package imported more often than not for
-% evil reasons.
+% The order of loading should be
+%
+%     hyperref -> amsthm -> cleveref
+%
+% evil reasons. Interestingly,
+%
+%   https://tex.stackexchange.com/questions/250904/destination-with-the-same-identifier-warning-with-shared-counters-cleveref-an/253694#253694
+%
+% says this should not work, but it does! This leaves me a bit
+% confused.
 \ifx\ST@type\ST@paper
   \definecolor{blue}{rgb}{0.38, 0.51, 0.71}
   \definecolor{red}{RGB}{175, 49, 39}
@@ -166,6 +173,9 @@
              , citecolor={green!65!black}
              , urlcolor={blue}
              ]{hyperref}
+  \usepackage{amsthm}
+  \usepackage{cleveref}
+  \newcommand{\creflastconjunction}{, and~} % I would like my Oxford comma, please.
 \fi
 
 %%% Sidenotes
