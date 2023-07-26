@@ -184,7 +184,7 @@
   \ifST@sidenotes
     \usepackage{mparhack}
     \newcommand*{\sidenotesize}{\@setfontsize\sidenotesize{8}{9}}
-    \newcommand{\sn}[1]{
+    \newcommand{\note}[1]{%
       \sidenote{%
         \sidenotesize
         % TODO: do we want this?
@@ -198,7 +198,7 @@
       }%
     }
   \else
-    \newcommand{\sn}[1]{\footnote{#1}}
+    \newcommand{\note}[1]{\footnote{#1}}
   \fi
 \fi
 
