@@ -187,12 +187,15 @@
     \newcommand{\note}[1]{%
       \sidenote{%
         \sidenotesize
-        % TODO: do we want this?
-        \checkoddpage
-        \ifoddpage
+        \if@twoside        % Two sided layout
+          \checkoddpage
+          \ifoddpage
+            \raggedright
+          \else
+            \raggedleft
+          \fi
+        \else              % One sided layout
           \raggedright
-        \else
-          \raggedleft
         \fi
         {#1}%
       }%
