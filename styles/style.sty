@@ -75,20 +75,6 @@
 \usepackage{CJKutf8}           % よ for the Yoneda embedding
 \usepackage{epigraph}
 
-%%%% Misc
-\usepackage{graphicx}          % include graphics in the document
-\usepackage{caption}           % captions outside of float environments
-\usepackage{subfiles}
-\usepackage{xspace}
-\ifthenelse{\equal\ST@type\ST@beamer \OR \equal\ST@type\ST@poster}{
-  \usepackage{qrcode}
-}{}
-\ifthenelse{\NOT\equal\ST@type\ST@beamer}{  % beamer doesn't like these
-  \usepackage{enumitem}
-}{
-  \usepackage{appendixnumberbeamer}
-}
-
 %%%% Hyphenation
 \usepackage{hyphenat}
 \hyphenation{auto-nomous}
@@ -157,6 +143,21 @@
     \end{tikzcd}
   }
 \fi
+
+%%%% Misc
+\usepackage{graphicx}          % include graphics in the document
+\usepackage{caption}           % captions outside of float environments
+\usepackage{subfiles}
+\usepackage{xspace}
+\ifthenelse{\equal\ST@type\ST@beamer \OR \equal\ST@type\ST@poster}{
+  \usepackage{qrcode}
+}{}
+\ifthenelse{\NOT\equal\ST@type\ST@beamer}{  % beamer doesn't like these
+  \usepackage{enumitem}
+}{
+  \usepackage{appendixnumberbeamer}
+}
+\usepackage{aligned-overset} % See https://tex.stackexchange.com/questions/257529/overset-and-align-environment-how-to-get-correct-alignment
 
 % The order of loading should be
 %
