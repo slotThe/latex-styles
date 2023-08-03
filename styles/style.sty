@@ -189,10 +189,10 @@
   \usepackage{sidenotes}
   \ifST@sidenotes
     \usepackage{mparhack}
-    \newcommand*{\sidenotesize}{\@setfontsize\sidenotesize{8}{9}}
+    \renewcommand*{\marginfont}{\footnotesize}
     \newcommand{\note}[1]{%
       \sidenote{%
-        \sidenotesize
+        \footnotesize
         \if@twoside        % Two sided layout
           \checkoddpage
           \ifoddpage
