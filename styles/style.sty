@@ -362,8 +362,8 @@
 %%%% Centres
 \NewDocumentCommand{\buildCenter}{m o o m o}{
   \IfBooleanTF{#1}
-    {\ensuremath{\mathcal{#2}({}_{\mathsf #3}{#4}_{\mathsf #5})}\xspace}
-    {\ensuremath{\mathcal{#2}({}_{\mathsf #3}{\cat{#4}}_{\mathsf #5})}\xspace}
+    {\ensuremath{\mathsf{#2} {}_{\mathsf{#3}}{#4}_{\mathsf{#5}}}\xspace}
+    {\ensuremath{\mathsf{#2} {}_{\mathsf{#3}}{\cat{#4}}_{\mathsf{#5}}}\xspace}
 }
 \NewDocumentCommand{\cent}{s O{} m O{}}{\buildCenter{#1}[Z][#2]{#3}[#4]}
 \newcommand*{\tcf}[2]{\buildCenter*[Z]{#1}[#2]}
