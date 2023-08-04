@@ -185,7 +185,7 @@
 \fi
 
 %%% Sidenotes
-\ifx\ST@type\ST@paper
+\ifthenelse{\equal\ST@type\ST@paper}{%
   \usepackage{sidenotes}
   \ifST@sidenotes
     \usepackage{mparhack}
@@ -209,7 +209,7 @@
   \else
     \newcommand{\note}[1]{\footnote{#1}}
   \fi
-\fi
+}
 
 %%% Environments
 
