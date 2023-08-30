@@ -517,8 +517,7 @@
 }
 
 % [1]_1,...,[1]_n
-\newcommand*{\set}[1]{\{ \seq{#1} \}}
-\newcommand*{\seq}[1]{\seqaux#1\relax}
+\newcommand{\seq}[1]{\seqaux#1\relax}
 \def\seqaux#1#2#3\relax{%
        {#1}#2 1,
     \ifnum\pdfstrcmp{#3}{3}=0
@@ -528,7 +527,9 @@
     \fi
     , {#1}#2{#3}
 }
-\newcommand*{\setnat}[1]{\{1,\ldots,#1 \}} % {1,...,[#1]}
+\newcommand{\set}[1]{\{ \seq{#1} \}}
+%%% {1,...,[1]}
+\newcommand{\setnat}[1]{\{1,\ldots,#1 \}}
 
 %%% Bibliography
 \ifthenelse{\NOT\equal\ST@type\ST@org}{
