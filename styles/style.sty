@@ -214,6 +214,11 @@
 
 %%% Environments
 
+%%%% Scale math mode equations
+\newcommand{\scalemath}[2]{\scalebox{#1}{%
+    \mbox{\ensuremath{\displaystyle #2}}}%
+}
+
 %%%% Saner equation numbering
 \ifx\ST@type\ST@paper
   \numberwithin{equation}{section}
