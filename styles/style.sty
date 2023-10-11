@@ -276,7 +276,7 @@
 \newcommand*{\EM}{Eilenberg--Moore\xspace}
 \newcommand*{\YetterDrinfeld}{Yetter--Drinfeld}
 \newcommand*{\Moerdijk}{Moerdijk\xspace}
-\newcommand*{\Brugieres}{Brugui\`eres\xspace}
+\newcommand*{\Bruguieres}{Brugui\`eres\xspace}
 \newcommand*{\Virelizier}{Virelizier\xspace}
 \newcommand*{\Turaev}{Turaev\xspace}
 \newcommand*{\GV}{Grothendieck--Verdier\xspace}
@@ -319,12 +319,10 @@
   \DeclareFontFamily{OT1}{cmrx}{}
   \DeclareFontShape{OT1}{cmrx}{m}{n}{<->cmr10}{}
   \let\saveLongrightarrow\Longrightarrow
-  \makeatletter
   \renewcommand*{\Longrightarrow}{%
     \mathrel{\rlap{\fontfamily{cmrx}\fontencoding{OT1}\selectfont=}%
       \hphantom{\saveLongrightarrow}%
       \llap{$\m@th\Rightarrow$}}}
-  \makeatother
 \fi
 
 %%%% Categories
