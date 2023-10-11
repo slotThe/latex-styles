@@ -325,6 +325,13 @@
       \llap{$\m@th\Rightarrow$}}}
 \fi
 
+%%%%% Slashed arrow for profunctors
+\ifx\ST@font\ST@lib
+  \DeclareSymbolFont{cmarrows}{OMS}{cmsy}{m}{n}
+  \DeclareMathSymbol{\mapstochar}{\mathrel}{cmarrows}{"37}
+\fi
+\newcommand*{\slashedrightarrow}{\relbar\joinrel\mapstochar\joinrel\rightarrow}
+
 %%%% Categories
 \DeclareMathOperator*{\Ob}{Ob}
 \DeclareMathOperator*{\Mor}{Mor}
