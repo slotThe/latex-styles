@@ -67,12 +67,6 @@
 \usepackage{scalerel}   % \scaleobj
 \usepackage{faktor}     % A/I
 
-\DeclareFontFamily{U}{DSSerif}{\skewchar \font =45}% openface
-\DeclareFontShape{U}{DSSerif}{m}{n}{<-> s*[1]  DSSerif}{}
-\DeclareFontSubstitution{U}{DSSerif}{m}{n}
-\DeclareMathAlphabet{\mathbbbb}{U}{DSSerif}{m}{n}
-\newcommand*{\1}{\text{\usefont{U}{DSSerif}{m}{n}1}}
-
 %%%% Language
 \usepackage[english]{babel}
 \usepackage{csquotes}
@@ -505,6 +499,13 @@
 \else
   \renewcommand*{\k}{\ensuremath{\mathtt{k}}\xspace}
 \fi
+
+% \mathbb{1} in a font that actually has it.
+\DeclareFontFamily{U}{DSSerif}{\skewchar \font =45}% openface
+\DeclareFontShape{U}{DSSerif}{m}{n}{<-> s*[1]  DSSerif}{}
+\DeclareFontSubstitution{U}{DSSerif}{m}{n}
+\DeclareMathAlphabet{\mathbbbb}{U}{DSSerif}{m}{n}
+\newcommand*{\1}{\text{\usefont{U}{DSSerif}{m}{n}1}}
 
 % Proper ≔
 \ifx\ST@type\ST@poster
