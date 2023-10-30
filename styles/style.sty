@@ -83,23 +83,6 @@
 \usepackage{hyphenat}
 \hyphenation{auto-nomous}
 
-%%%% Todonotes
-\setlength{\marginparwidth}{2.5cm}
-\usepackage[ colorinlistoftodos  %
-           , prependcaption      %
-           , textsize=tiny       %
-           , textwidth=2.5cm     %
-           , bordercolor=black!0 %
-           ] {todonotes}
-\tikzset{/tikz/notestyleraw/.append style={rounded corners=2pt, font=sffamily}}
-\definecolor{tdstylecol}{rgb}{0.0, 0.7, 1.0}
-\newcommand{\hsc}[1]{{\textsf{\footnotesize\MakeUppercase{#1}}}}
-\newcommand{\tdref}[2][]{\todo[color=yellow, textcolor=black, #1]{\hsc{Ref:} #2}}
-\newcommand{\tdmissing}[2][]{\todo[color=orange!80, #1]{\hsc{Missing:} #2}}
-\newcommand{\tdnote}[2][]{\todo[color=tdstylecol!20, #1]{\hsc{Note:} #2}}
-\newcommand{\tdproof}[1][]{\tdmissing[#1]{proof}}
-\newcommand{\tdstyle}[2][]{\todo[color=tdstylecol!20, #1]{\hsc{Style:} #2}}
-
 %%%% TikZ
 \usepackage{pgfplots}
 \usepackage{tikz}
@@ -148,6 +131,25 @@
   }
 \fi
 
+%%%%% Colours
+\definecolor{blue}{rgb}{0.38, 0.51, 0.71}
+\definecolor{red}{RGB}{175, 49, 39}
+\definecolor{green}{RGB}{146, 227, 95}
+
+%%%% Todonotes
+\ifST@draft
+  \usepackage[draft, inline, marginclue, silent, inlineface={\tiny\scshape\color{red}}]{fixme}
+  \FXRegisterAuthor{tz}{atz}{T.Z.:}
+\fi
+\newcommand{\TOC}{
+  \microtypesetup{protrusion=false}
+  \tableofcontents
+  \ifST@draft
+    \listoffixmes
+  \fi
+  \microtypesetup{protrusion=true}
+}
+
 %%%% Misc
 \usepackage{graphicx}          % include graphics in the document
 \usepackage{caption}           % captions outside of float environments
@@ -174,9 +176,6 @@
 % says this should not work, but it does! This leaves me a bit
 % confused.
 \ifx\ST@type\ST@paper
-  \definecolor{blue}{rgb}{0.38, 0.51, 0.71}
-  \definecolor{red}{RGB}{175, 49, 39}
-  \definecolor{green}{RGB}{146, 227, 95}
   \usepackage[ colorlinks
              , linktoc=page
              , linkcolor={red}
