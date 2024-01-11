@@ -413,7 +413,8 @@
  }
 
 %%%% Monads
-\newcommand*{\monad}[1]{\ensuremath{(#1, \mu^{#1}, \eta^{#1})}\xspace}
+\newcommand*{\monadl}[1]{\ensuremath{(#1, \mu^{#1}, \eta^{#1})}\xspace}
+\newcommand*{\monad}[1]{\ensuremath{(#1, \mu, \eta)}\xspace}
 \newcommand*{\stdmonad}{\monad{T}}
 \newcommand*{\dmonad}{\ensuremath{S \circ_{\Omega} T}\xspace}
 
