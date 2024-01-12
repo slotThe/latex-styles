@@ -51,21 +51,23 @@
   {encoding=T1,size={7,8}}
   {1={ ,750},2={ ,500},3={ ,500},4={ ,500},5={ ,500},
     6={ ,500},7={ ,600},8={ ,500},9={ ,500},0={ ,500}}
-%%%%% Font choice
+
+%%%% Maths
+\usepackage{mathtools}
+\usepackage{amssymb}    % NOTE: Needs to be loaded before libertine
+\usepackage{bussproofs}
+\usepackage{cmll}       % \parr
+\usepackage{leftidx}    % good-looking left super-/subscripts
+\usepackage{scalerel}   % \scaleobj
+\usepackage{faktor}     % A/I
+
+%%%% Font
 \ifx\ST@font\ST@lib
   \usepackage[ttscale=.85]{libertine}
   \usepackage{libertinust1math}
 \else
   \usepackage{lmodern}
 \fi
-
-%%%% Maths
-\usepackage{mathtools}
-\usepackage{bussproofs}
-\usepackage{cmll}       % \parr
-\usepackage{leftidx}    % good-looking left super-/subscripts
-\usepackage{scalerel}   % \scaleobj
-\usepackage{faktor}     % A/I
 
 %%%% Language
 \usepackage[english]{babel}
