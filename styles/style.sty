@@ -29,6 +29,12 @@
 \DeclareBoolOption{sidenotes}
 \DeclareComplementaryOption{footnotes}{sidenotes}
 
+\DeclareStringOption[normal]{math}
+\edef\DocFont{\ST@math}
+\newcommand*{\ST@normal}{normal}
+\newcommand*{\ST@euler}{euler}
+\newcommand*{\ST@fancy}{fancy}
+
 \ProcessKeyvalOptions*
 
 %%% Packages
@@ -67,6 +73,12 @@
   \usepackage{libertinust1math}
 \else
   \usepackage{lmodern}
+\fi
+%%%%% Mathcal font
+\ifx\ST@math\ST@euler
+  \usepackage[cal=euler, frak=euler]{mathalfa}
+\fi\ifx\ST@math\ST@fancy
+  \usepackage[cal=rsfso, calscaled=0.96, frak=euler]{mathalfa}
 \fi
 
 %%%% Language
