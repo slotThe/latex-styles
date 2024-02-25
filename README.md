@@ -14,3 +14,10 @@ The basic structure is like this:
     └── tikzit.tikzstyles # arrow styles for tikzit
 
 An example file is provided by means of [example.tex](./example.tex).
+
+Typical usage in another project would be to include this repository as a git submodule and symlink `style` into the right place.
+
+``` console
+$ git submodule add https://github.com/slotthe/latex-styles
+$ ln -s latex-styles/styles/ styles
+```
