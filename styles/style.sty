@@ -1,4 +1,9 @@
 % `M-x occur %%% RET' gives a good overview.
+%
+% Some packages (like quiver.sty and tikzit.sty) are inlined in this
+% file; local packages in LaTeX are a bit flaky. This is especially
+% important since I want this setup to work not just for editing plain
+% .tex files, but also for Org and Anki.
 
 %%% Options
 
@@ -106,16 +111,77 @@
   decorations.text,
   decorations.markings
 }
-\ifthenelse{\NOT\equal\ST@type\ST@org}{
-  \usepackage{styles/quiver}        % q.uiver.app
-  \usepackage{styles/tikzit}
-  \input{styles/tikzit.tikzstyles}
-  \newcommand{\inputtikz}[1]{%
+
+%%%%% tikzit.sty
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes, shapes.geometric, shapes.misc}
+% this style is applied by default to any tikzpicture included via \tikzfig
+\tikzstyle{tikzfig}=[baseline=-0.25em,scale=0.5]
+% these are dummy properties used by TikZiT, but ignored by LaTex
+\pgfkeys{/tikz/tikzit fill/.initial=0}
+\pgfkeys{/tikz/tikzit draw/.initial=0}
+\pgfkeys{/tikz/tikzit shape/.initial=0}
+\pgfkeys{/tikz/tikzit category/.initial=0}
+% standard layers used in .tikz files
+\pgfdeclarelayer{edgelayer}
+\pgfdeclarelayer{nodelayer}
+\ifx\ST@type\ST@poster
+  \pgfsetlayers{backgroundlayer,main,notelayer,edgelayer,nodelayer}
+\else
+  \pgfsetlayers{background,edgelayer,nodelayer,main}
+\fi
+% style for blank nodes
+\tikzstyle{none}=[inner sep=0mm]
+% include a .tikz file
+\newcommand{\tikzfig}[1]{{%
     \ifST@externalize
       \tikzsetnextfilename{#1}%
     \fi
-    \tikzfig{#1}%
-  }
+    \tikzstyle{every picture}=[tikzfig]
+    \IfFileExists{#1.tikz}
+    {\input{#1.tikz}}
+    {%
+      \IfFileExists{chapters/figures/#1.tikz}
+      {\input{chapters/figures/#1.tikz}}
+      {\tikz[baseline=-0.5em]{\node[draw=red,font=\color{red},fill=red!10!white] {\textit{#1}};}}%
+    }%
+  }}
+% fix strange self-loops, which are PGF/TikZ default
+\tikzstyle{every loop}=[]
+
+%%%%% quiver.sty for q.uiver.app
+\RequirePackage{tikz-cd}
+% `amssymb` is necessary for `\lrcorner` and `\ulcorner`.
+\ifx\ST@font\ST@lib\else
+  \RequirePackage{amssymb}
+\fi
+% `pathmorphing` is necessary to draw squiggly arrows.
+\usetikzlibrary{decorations.pathmorphing}
+% A TikZ style for curved arrows of a fixed height, due to AndréC.
+\tikzset{%
+  curve/.style={%
+    settings={#1},
+    to path={%
+      (\tikztostart)
+      .. controls ($(\tikztostart)!\pv{pos}!(\tikztotarget)!\pv{height}!270:(\tikztotarget)$)
+      and ($(\tikztostart)!1-\pv{pos}!(\tikztotarget)!\pv{height}!270:(\tikztotarget)$)
+      .. (\tikztotarget)\tikztonodes%
+    }%
+  },
+  settings/.code={\tikzset{quiver/.cd,#1}
+    \def\pv##1{\pgfkeysvalueof{/tikz/quiver/##1}}
+  },
+  quiver/.cd,pos/.initial=0.35,height/.initial=0%
+}
+% TikZ arrowhead/tail styles.
+\tikzset{tail reversed/.code={\pgfsetarrowsstart{tikzcd to}}}
+\tikzset{2tail/.code={\pgfsetarrowsstart{Implies[reversed]}}}
+\tikzset{2tail reversed/.code={\pgfsetarrowsstart{Implies}}}
+% TikZ arrow styles.
+\tikzset{no body/.style={/tikz/dash pattern=on 0 off 1mm}}
+
+\ifthenelse{\NOT\equal\ST@type\ST@org}{
+  \input{styles/tikzit.tikzstyles}
 }{}
 
 %%%%% Externalisation
