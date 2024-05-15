@@ -592,6 +592,12 @@
     =}
 \fi
 
+% Proper ::=
+\newcommand*{\bnf}{%
+  \mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
+      \hbox{\scriptsize.}\hbox{\scriptsize.}}}%
+  \defeq}
+
 % Like \colon, but for the other side.
 \ifx\ST@font\ST@lib
   \newcommand{\ST@colon}{:\!}
