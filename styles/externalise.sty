@@ -3,7 +3,9 @@
 %
 % Source: https://tex.stackexchange.com/questions/42486/todonotes-and-tikzexternalize
 
-\renewcommand{\todo}[2][]{\tikzexternaldisable\@todo[#1]{#2}\tikzexternalenable}
+\ifdefined\todo%
+  \renewcommand{\todo}[2][]{\tikzexternaldisable\@todo[#1]{#2}\tikzexternalenable}%
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Externalize tikz-cd as best as possible
