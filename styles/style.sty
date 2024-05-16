@@ -250,7 +250,7 @@
 %
 % says this should not work, but it does! This leaves me a bit
 % confused.
-\ifx\ST@type\ST@paper
+\ifthenelse{\equal\ST@type\ST@paper}{
   \usepackage[ colorlinks
              , linktoc=page
              , linkcolor={red}
@@ -262,12 +262,14 @@
   \newcommand{\creflastconjunction}{, and~} % I would like my Oxford comma, please.
   \Crefname{diagram}{Diagram}{Diagrams}
   \Crefformat{diagram}{Diagram~(#2#1#3)}
-\else\ifx\ST@type\ST@poster
-  % XXX: Hyperref + tikzposter + microtype result in some ridiculous
-  % incompatibility. Of the three, hyperref seems the least important,
-  % so exclude it here.
-  \usepackage{amsthm}
-\fi
+}{
+  \ifthenelse{\equal\ST@type\ST@poster}{
+    % XXX: Hyperref + tikzposter + microtype result in some ridiculous
+    % incompatibility. Of the three, hyperref seems the least important,
+    % so exclude it here.
+    \usepackage{amsthm}
+  }{}
+}
 
 %%% Sidenotes
 \ifthenelse{\equal\ST@type\ST@paper}{%
