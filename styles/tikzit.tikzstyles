@@ -11,13 +11,14 @@
 \tikzstyle{PP}=[draw={rgb,255:red,102;green,41;blue,163}, shape=circle, fill={rgb,255:red,102;green,41;blue,163}, scale=0.3]
 
 % Edge styles
-\tikzstyle{thick-edge}=[-, draw=black, thick]
+\tikzstyle{morphism-edge}=[-, draw=black, thick]
+\tikzstyle{cotensor}=[-, draw=gray]
 \tikzstyle{braid-over}=[-, draw=white, thick, double=black, double distance=0.8pt, tikzit draw={rgb,255: red,128; green,0; blue,128}]
 \tikzstyle{purple-over}=[-, draw=white, thick, double={rgb,255:red,102;green,41;blue,163}, double distance=0.8pt, tikzit draw={rgb,255:red,102;green,41;blue,163}]
 \tikzstyle{purple}=[-, draw={rgb,255:red,102;green,41;blue,163}, thick]
 \tikzstyle{blue-under}=[-, draw={rgb,255:red,0;green,128;blue,128}, thick]
 \tikzstyle{ddd}=[-, draw=black, dash dot dot]
 \tikzstyle{unit}=[-, draw=black, densely dotted]
-\tikzstyle{Front}=[-, draw=black, fill={rgb,255 :red,255; green,255; blue,255}, opacity=0.8]
+\tikzstyle{Front}=[-, draw=black, fill=white, opacity=0.8]
 \tikzstyle{Hidden}=[-, draw=black, fill={rgb,255 :red,255; green,255; blue,255}, opacity=0.2]
 \tikzstyle{directed}=[-, thick, black, decoration={markings, mark=at position 0.5 with {\arrow{>}}}, postaction=decorate]
