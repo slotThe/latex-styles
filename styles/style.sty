@@ -479,11 +479,12 @@
 \newcommand*{\ltw}[2]{\bm{#1}{\Id_{#1}}{#2}}
 \newcommand*{\lcomod}[2]{\ensuremath{\leftidx{^{#1}}{\! #2}{}}}
 
-\newcommand*{\@smallTriangle}[2]{\raisebox{0.075em}{\scalebox{0.75}{\ensuremath{#1#2}}}}
+\newcommand*{\@smallTriangle}[2]{\raisebox{\depth+0.025em}{\scalebox{0.75}{\ensuremath{#1#2}}}}
+\newcommand*{\@medTriangle}[2]{\raisebox{\depth+0.025em}{\scalebox{0.90}{\ensuremath{#1#2}}}}
 \newcommand*{\lact}{\mathbin{\mathpalette\@smallTriangle\rhd}}
 \newcommand*{\ract}{\mathbin{\mathpalette\@smallTriangle\lhd}}
-\newcommand*{\blact}{\mathbin{\mathpalette\@smallTriangle\blacktriangleright}}
-\newcommand*{\bract}{\mathbin{\mathpalette\@smallTriangle\blacktriangleleft}}
+\newcommand*{\blact}{\mathbin{\mathpalette\@medTriangle\blacktriangleright}}
+\newcommand*{\bract}{\mathbin{\mathpalette\@medTriangle\blacktriangleleft}}
 
 %%%% Monads
 \newcommand*{\monadl}[1]{\ensuremath{(#1, \mu^{#1}, \eta^{#1})}\xspace}
