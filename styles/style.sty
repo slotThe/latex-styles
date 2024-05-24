@@ -122,6 +122,18 @@
   decorations.markings
 }
 
+%%%%% Elementary tikz-cd things.
+\RequirePackage{tikz-cd}
+\ifx\ST@font\ST@lib
+  % One should prefer 'arrow style=math font', but this looks horribly
+  % "tacked on" with Libertine. Straight Barb is at least better than the
+  % default CM-type arrows.
+  \tikzcdset{
+    arrow style=tikz,
+    diagrams={>={Straight Barb}}
+  }
+\fi
+
 %%%%% tikzit.sty
 \usetikzlibrary{arrows}
 \usetikzlibrary{shapes, shapes.geometric, shapes.misc}
@@ -160,7 +172,6 @@
 \tikzstyle{every loop}=[]
 
 %%%%% quiver.sty for q.uiver.app
-\RequirePackage{tikz-cd}
 % `amssymb` is necessary for `\lrcorner` and `\ulcorner`.
 \ifx\ST@font\ST@lib\else
   \RequirePackage{amssymb}
