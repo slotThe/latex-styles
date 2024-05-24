@@ -31,6 +31,9 @@
 \newcommand*{\ST@lib}{libertine}
 \newcommand*{\ST@cm}{computer-modern}
 
+\DeclareBoolOption{osf}
+\DeclareComplementaryOption{lining-figures}{osf}
+
 \DeclareBoolOption{sidenotes}
 \DeclareComplementaryOption{footnotes}{sidenotes}
 
@@ -75,8 +78,14 @@
 
 %%%% Font
 \ifx\ST@font\ST@lib
-  \usepackage[ttscale=.85]{libertine}
-  \usepackage{libertinust1math}
+  \ifST@osf
+    \usepackage[sb,osf]{libertinus}
+  \else
+    \usepackage[sb]{libertinus}
+  \fi
+  \usepackage{textcomp}
+  \usepackage[varqu,varl]{zi4}% inconsolata for mono, not LibertineMono
+  \usepackage[amsthm,upint,lcgreekalpha]{libertinust1math}
 \else
   \usepackage{lmodern}
 \fi
