@@ -549,10 +549,14 @@
 % TODO: Make a \longrightleftarrows version
 \newcommand*{\stdadj}{\adj{F}{U}{\cc}{\dd}}
 
-\ifthenelse{\equal\ST@type\ST@poster \OR \equal\ST@type\ST@beamer}{
+\ifthenelse{\equal\ST@type\ST@poster\OR\equal\ST@type\ST@beamer}{
   \newcommand*{\adjspace}{\;}
 }{
-  \newcommand*{\adjspace}{\,}
+  \ifthenelse{\equal\ST@font\ST@lib}{
+    \newcommand*{\adjspace}{\,}
+  }{
+    \newcommand*{\adjspace}{}
+  }
 }
 \newcommand*{\adjoint}{\adjspace\dashv\adjspace}  % L ⊣ R
 \newcommand*{\lad}{\adjoint}
