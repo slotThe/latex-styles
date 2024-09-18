@@ -142,7 +142,7 @@
 
 %%%%% Elementary tikz-cd things.
 \RequirePackage{tikz-cd}
-\ifx\ST@font\ST@lib
+\ifthenelse{\equal\ST@font\ST@lib\OR\equal\ST@font\ST@pal}{%
   % One should prefer 'arrow style=math font', but this looks horribly
   % "tacked on" with Libertine. Straight Barb is at least better than the
   % default CM-type arrows.
@@ -150,7 +150,7 @@
     arrow style=tikz,
     diagrams={>={Straight Barb}}
   }
-\fi
+}{}
 
 %%%%% tikzit.sty
 \usetikzlibrary{arrows}
