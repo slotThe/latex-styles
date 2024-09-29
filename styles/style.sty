@@ -256,9 +256,10 @@
 \fi
 \newcommand{\TOC}{
   \microtypesetup{protrusion=false}
+  \addtocontents{toc}{\SkipTocEntry}
   \tableofcontents
   \ifST@draft
-    \listoffixmes
+    \listoffixmes%
   \fi
   \microtypesetup{protrusion=true}
 }
