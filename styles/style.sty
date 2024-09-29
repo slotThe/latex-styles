@@ -312,22 +312,22 @@
 
 %%% Sidenotes
 \ifthenelse{\equal\ST@type\ST@paper}{%
-  \usepackage{sidenotes}
   \ifST@sidenotes
+    \usepackage{styles/sidenotes}
     \usepackage{mparhack}
     \renewcommand*{\marginfont}{\footnotesize}
     \newcommand{\note}[1]{%
       \sidenote{%
         \footnotesize
         \if@twoside        % Two sided layout
-          \checkoddpage
-          \ifoddpage
-            \raggedright
+          \checkoddpage%
+          \ifoddpage%
+            \raggedright%
           \else
-            \raggedleft
+            \raggedleft%
           \fi
         \else              % One sided layout
-          \raggedright
+          \raggedright%
         \fi
         {#1}%
       }%
