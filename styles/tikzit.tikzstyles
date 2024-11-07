@@ -5,13 +5,14 @@
 
 % Node styles
 \tikzstyle{whitedot}=[fill=white, draw, shape=circle, scale=0.3, tikzit draw=black, tikzit shape=circle, tikzit fill=white]
-\tikzstyle{blackdot}=[fill=black, draw, shape=circle, scale=0.3, tikzit draw=black, tikzit shape=circle, tikzit fill=black]
+\tikzstyle{blackdot}=[fill=black, draw, shape=circle, scale=0.4, tikzit draw=black, tikzit shape=circle, tikzit fill=black]
 \tikzstyle{box}=[fill=white, draw=black, shape=rectangle, tikzit fill=white]
 \tikzstyle{BL}=[draw=black, shape=circle, fill=black, scale=0.3]
 \tikzstyle{PP}=[draw={rgb,255:red,102;green,41;blue,163}, shape=circle, fill={rgb,255:red,102;green,41;blue,163}, scale=0.3]
 
 % Edge styles
 \tikzstyle{morphism-edge}=[-, draw=black, thick]
+\tikzstyle{morphism}=[-, draw=black, thick]
 \tikzstyle{cotensor}=[-, draw=gray]
 \tikzstyle{braid-over}=[-, draw=white, thick, double=black, double distance=0.8pt, tikzit draw={rgb,255: red,128; green,0; blue,128}]
 \tikzstyle{purple-over}=[-, draw=white, thick, double={rgb,255:red,102;green,41;blue,163}, double distance=0.8pt, tikzit draw={rgb,255:red,102;green,41;blue,163}]
