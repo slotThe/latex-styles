@@ -181,8 +181,8 @@
     \IfFileExists{#1.tikz}
     {\input{#1.tikz}}
     {%
-      \IfFileExists{chapters/figures/#1.tikz}
-      {\input{chapters/figures/#1.tikz}}
+      \IfFileExists{figures/#1.tikz}
+      {\input{figures/#1.tikz}}
       {\tikz[baseline=-0.5em]{\node[draw=red,font=\color{red},fill=red!10!white] {\textit{#1}};}}%
     }%
   }}
