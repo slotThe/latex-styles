@@ -290,12 +290,7 @@
 % says this should not work, but it does! This leaves me a bit
 % confused.
 \ifthenelse{\equal\ST@type\ST@paper}{
-  \usepackage[ colorlinks
-             , linktoc=page
-             , linkcolor={red}
-             , citecolor={green!65!black}
-             , urlcolor={blue}
-             ]{hyperref}
+  \usepackage[colorlinks, linktoc=page, linkcolor={red}, citecolor={red}, urlcolor={red}]{hyperref}
   \usepackage{amsthm}
   \usepackage[capitalise, noabbrev]{cleveref}
   \newcommand{\creflastconjunction}{, and~} % I would like my Oxford comma, please.
