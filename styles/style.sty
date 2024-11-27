@@ -516,6 +516,21 @@
 \newcommand*{\bm}[3]{\ensuremath{{}_{#2}#1_{#3}}}
 \newcommand*{\ltw}[2]{\bm{#1}{\Id_{#1}}{#2}}
 \newcommand*{\lcomod}[2]{\ensuremath{\leftidx{^{#1}}{\! #2}{}}}
+% Tetramodules starting at top left and continuing in positive direction.
+\NewDocumentCommand{\Tetramod}{O{} O{} O{} O{}}{% infinite-dimensional
+  \leftidx{^{#1}_{#2}}{{\kVect}}{_{#3}^{#4}}%
+}
+\NewDocumentCommand{\tetramodfd}{O{} O{} O{} O{}}{% finite-dimensional
+  \leftidx{^{#1}_{#2}}{{\kvect}}{_{#3}^{#4}}%
+}
+\newcommand*{\trimod}[1][B]{\tetramodfd[#1][#1][][#1]} % Hopf trimodules
+\newcommand*{\Trimod}[1][B]{\Tetramod[#1][#1][][#1]}   % Hopf Trimodules
+\newcommand*{\termod}[1][B]{\tetramodfd[#1][#1][#1][]} % Hopf termodules
+\newcommand*{\Termod}[1][B]{\Tetramod[#1][#1][#1][]}   % Hopf Termodules
+\newcommand*{\bcomod}[1][B]{\tetramodfd[#1]}
+\newcommand*{\bComod}[1][B]{\Tetramod[#1]}
+\newcommand*{\bmodfd}[1][B]{\tetramodfd[][#1][][]}     % XXX: \bmod already taken?
+\newcommand*{\bMod}[1][B]{\tetramod[][#1][][]}
 
 \newcommand*{\@smallTriangle}[2]{\raisebox{\depth+0.025em}{\scalebox{0.75}{\ensuremath{#1#2}}}}
 \newcommand*{\@medTriangle}[2]{\raisebox{\depth+0.025em}{\scalebox{0.90}{\ensuremath{#1#2}}}}
