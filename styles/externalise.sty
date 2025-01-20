@@ -35,6 +35,7 @@
   % aren't defined at this point yet.  The same thing holds for the
   % arguments to the tikzcd-environment.
   \def\myargs{#1}%
+  \tikzsetnextfilename{\pdfmdfivesum{\expandonce\BODY}}
   \edef\mydiagram{
     \noexpand\mytikzcdcontext{\expandonce\BODY}{\expandonce\myargs}
   }%
