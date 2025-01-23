@@ -361,6 +361,7 @@
   \theoremstyle{plain}
   \ifthenelse{\equal\ST@type\ST@paper \OR \equal\ST@type\ST@poster}{
     \newtheorem{theorem}{Theorem}
+    \newtheorem{porism}[theorem]{Porism}
     \newtheorem{lemma}[theorem]{Lemma}
     \newtheorem{corollary}[theorem]{Corollary}
     \newtheorem{proposition}[theorem]{Proposition}
@@ -382,6 +383,8 @@
   \newtheorem*{question*}{Question}
   \newtheorem*{remark*}{Remark}
   \newtheorem*{convention}{Convention}
+  \newtheorem{hypothesis}[theorem]{Hypothesis}
+  \newtheorem{assumption}[theorem]{Assumption}
 }{}
 
 %%% Commands
