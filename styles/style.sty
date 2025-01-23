@@ -416,10 +416,10 @@
 \newcommand*{\longtwoheadrightarrow}{\relbar\joinrel\twoheadrightarrow}
 \renewcommand*{\to}{\longrightarrow}
 \renewcommand*{\mapsto}{\longmapsto}
-\newcommand*{\inj}{\longhookrightarrow}
+\newcommand*{\inj}[1]{\ensuremath{#1\textnormal{-inj}}}
+\newcommand*{\proj}[1]{\ensuremath{#1\textnormal{-proj}}}
 \newcommand*{\emb}{\longhookrightarrow}
 \newcommand*{\sur}{\longtwoheadrightarrow}
-\newcommand*{\proj}{\longtwoheadrightarrow}
 \ifx\ST@font\ST@lib
   \newcommand*{\iso}{%
     \overset{\smash{\raisebox{-0.65ex}{\ensuremath{\scriptstyle\sim}}}%
