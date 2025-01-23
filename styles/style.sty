@@ -577,10 +577,19 @@
 \newcommand*{\rad}{\radjoint}
 
 %%%% Duals
-\newcommand*{\ld}[1]{\leftidx{^\vee}{\!#1}{}}     % normal left  dual
-\newcommand*{\rd}[1]{{#1}^\vee}                   % normal right dual
-\newcommand*{\lld}[1]{\leftidx{^{\vee\vee}}{\!#1}{}} % left  double dual
-\newcommand*{\rrd}[1]{{#1}^{\vee\vee}}               % right double dual
+\newcommand*{\@rdstar}[1]{{#1}^{\ast}}
+\newcommand*{\@rdnostar}[1]{{#1}^{\vee}}
+\newcommand*{\@rrdstar}[1]{{#1}^{\ast\ast}}
+\newcommand*{\@rrdnostar}[1]{{#1}^{\vee\vee}}
+\newcommand*{\@ldstar}[1]{\lextidx{^{*}}{#1}{}}
+\newcommand*{\@ldnostar}[1]{\leftidx{^{\vee}}{#1}{}}
+\newcommand*{\@lrdstar}[1]{\leftidx{^{\ast\ast}}{#1}{}}
+\newcommand*{\@lldnostar}[1]{\leftidx{^{\vee\vee}}{#1}{}}
+\def\ld{\@ifstar\@ldstar\@ldnostar}
+\def\rd{\@ifstar\@rdstar\@rdnostar}
+\def\lld{\@ifstar\@lldstar\@lldnostar}
+\def\rrd{\@ifstar\@rrdstar\@rrdnostar}
+
 \newcommand*{\ev}{\mathrm{ev}}          %   evaluation of the left  dual
 \newcommand*{\evr}{\widetilde{\ev}}     %   evaluation of the right dual
 \newcommand*{\coev}{\mathrm{coev}}      % coevaluation of the left  dual
