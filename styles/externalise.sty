@@ -1,13 +1,4 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Do not externalize TODOs
-%
-% Source: https://tex.stackexchange.com/questions/42486/todonotes-and-tikzexternalize
-
-\ifdefined\todo%
-  \renewcommand{\todo}[2][]{\tikzexternaldisable\@todo[#1]{#2}\tikzexternalenable}%
-\fi
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Externalize tikz-cd as best as possible
 %
 % Source: https://tex.stackexchange.com/questions/171931/are-the-tikz-libraries-cd-and-external-incompatible-with-one-another/362104#362104
@@ -15,17 +6,18 @@
 %
 % This nests a tikzcd picture inside a tikzpicture, which is
 % unbelievably horrible and will probably come crashing down at some
-% point.  However, for now it works and it brings compilation times down
+% point. However, for now it works and it brings compilation times down
 % quite significantly.
-
-\def\temp{&} \catcode`&=\active \let&=\temp
+%
+% NOTE: Pictures need 'ampersand replacement'.
 
 \newcommand{\mytikzcdcontext}[2]{
   \begin{tikzpicture}[baseline=(maintikzcdnode.base)]
-      \node (maintikzcdnode) [inner sep=0, outer sep=0] {\begin{tikzcd}[#2]
-            #1
-        \end{tikzcd}};
-  \end{tikzpicture}}
+    \node (maintikzcdnode) [inner sep=0, outer sep=0] {\begin{tikzcd}[#2]
+        #1
+      \end{tikzcd}};
+  \end{tikzpicture}%
+}
 
 % Correctly regenerate the picture if the md5 hash changes.
 \NewEnviron{mytikzcd}[1][]{%
@@ -36,7 +28,7 @@
   % arguments to the tikzcd-environment.
   \def\myargs{#1}%
   \tikzsetnextfilename{\pdfmdfivesum{\expandonce\BODY}}
-  \edef\mydiagram{
+  \edef\mydiagram{%
     \noexpand\mytikzcdcontext{\expandonce\BODY}{\expandonce\myargs}
   }%
   \mydiagram%
