@@ -548,12 +548,19 @@
 \newcommand*{\bmodfd}[1][B]{\tetramodfd[][#1][][]}     % XXX: \bmod already taken?
 \newcommand*{\bMod}[1][B]{\tetramod[][#1][][]}
 
-\newcommand*{\@smallTriangle}[2]{\vcenter{\hbox{\scalebox{0.75}{\ensuremath{#1#2}}}}}
-\newcommand*{\@medTriangle}[2]{\vcenter{\hbox{\scalebox{0.90}{\ensuremath{#1#2}}}}}
-\newcommand*{\lact}{\mathbin{\mathpalette\@smallTriangle\triangleright}}
-\newcommand*{\ract}{\mathbin{\mathpalette\@smallTriangle\triangleleft}}
-\newcommand*{\blact}{\mathbin{\mathpalette\@medTriangle\blacktriangleright}}
-\newcommand*{\bract}{\mathbin{\mathpalette\@medTriangle\blacktriangleleft}}
+\newcommand*{\@medTriangle}[2]{\vcenter{\hbox{\scalebox{0.85}{\ensuremath{#1#2}}}}}
+\let\bl@old\blacktriangleleft%
+\let\br@old\blacktriangleright%
+\newcommand*{\blact}{\mathbin{\mathpalette\@medTriangle\br@old}}
+\newcommand*{\bract}{\mathbin{\mathpalette\@medTriangle\bl@old}}
+\ifx\ST@font\ST@pal
+  \newcommand*{\lact}{\triangleright}
+  \newcommand*{\ract}{\triangleleft}
+\else
+  \newcommand*{\@smallTriangle}[2]{\vcenter{\hbox{\scalebox{0.75}{\ensuremath{#1#2}}}}}
+  \newcommand*{\lact}{\mathbin{\mathpalette\@smallTriangle\triangleright}}
+  \newcommand*{\ract}{\mathbin{\mathpalette\@smallTriangle\triangleleft}}
+\fi
 
 %%%% Monads
 \newcommand*{\monadl}[1]{\ensuremath{(#1, \mu^{#1}, \eta^{#1})}\xspace}
