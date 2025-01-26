@@ -325,8 +325,25 @@
         {#1}%
       }%
     }
+    \newcommand{\scaption}[2][{}]{%
+      \marginnote{%
+        #1%
+        \caption{%
+          \if@twoside
+            \checkoddpage%
+            \ifoddpage%
+              \raggedright%
+            \else
+              \raggedleft%
+            \fi
+          \else
+            \raggedright%
+          \fi
+        {#2}}}
+  }
   \else
     \newcommand{\note}[1]{\footnote{#1}}
+    \newcommand{\scaption}[2][{}]{\caption{#2}}
   \fi
 }
 
