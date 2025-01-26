@@ -528,10 +528,15 @@
 %%%% Modules
 \newcommand*{\lMod}[1]{#1\textnormal{-Mod}}
 \newcommand*{\lmod}[1]{#1\textnormal{-mod}}
+\newcommand*{\rmod}[1]{\textnormal{mod-}#1}
+\newcommand*{\rMod}[1]{\textnormal{Mod-}#1}
 \newcommand*{\YDM}[1]{\ensuremath{{}^{#1}_{#1}\mathcal{YD}}\xspace}
 \newcommand*{\bm}[3]{\ensuremath{{}_{#2}#1_{#3}}}
 \newcommand*{\ltw}[2]{\bm{#1}{\Id_{#1}}{#2}}
-\newcommand*{\lcomod}[2]{\ensuremath{\leftidx{^{#1}}{\! #2}{}}}
+\newcommand*{\lcomod}[1]{#1\textnormal{-comod}}
+\newcommand*{\lComod}[1]{#1\textnormal{-Comod}}
+\newcommand*{\biComod}[2]{#1\textnormal{-Comod-}#2}
+\newcommand*{\bicomod}[2]{#1\textnormal{-comod-}#2}
 % Tetramodules starting at top left and continuing in positive direction.
 \NewDocumentCommand{\Tetramod}{O{} O{} O{} O{}}{% infinite-dimensional
   \leftidx{^{#1}_{#2}}{{\kVect}}{_{#3}^{#4}}%
