@@ -329,9 +329,9 @@
         {#1}%
       }%
     }
-    \newcommand{\scaption}[2][{}]{%
+    \newcommand{\scaption}[2][0cm]{%
       \marginnote{%
-        #1%
+        \vspace{#1}%
         \caption{%
           \if@twoside
             \checkoddpage%
