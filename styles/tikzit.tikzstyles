@@ -21,5 +21,5 @@
 \tikzstyle{ddd}=[-, draw=black, dash dot dot]
 \tikzstyle{unit}=[-, draw=black, densely dotted]
 \tikzstyle{Front}=[-, draw=black, fill=white, opacity=0.8]
-\tikzstyle{Hidden}=[-, draw=black, fill={rgb,255 :red,255; green,255; blue,255}, opacity=0.2]
-\tikzstyle{directed}=[-, thick, black, decoration={markings, mark=at position 0.5 with {\arrow{>}}}, postaction=decorate]
+\tikzstyle{Hidden}=[-, draw=black, fill=white, opacity=0.2]
+\tikzstyle{directed}=[-, thick, black, decoration={markings, mark=at position 0.5 with {\arrow{>={Straight Barb}}}}, postaction=decorate]
