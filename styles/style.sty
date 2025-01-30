@@ -520,12 +520,12 @@
 }
 
 %%%% Centres
-\NewDocumentCommand{\buildCenter}{m o o m o}{
+\NewDocumentCommand{\buildCenter}{m o O{\,} m O{}}{
   \IfBooleanTF{#1}
-    {\ensuremath{\mathsf{#2}(\leftidx{_{\mathsf{#3}}}{{#4}}{_{\mathsf{#5}}})}\xspace}
-    {\ensuremath{\mathsf{#2}(\leftidx{_{\mathsf{#3}}}{\cat{#4}}{_{\mathsf{#5}}})}\xspace}
+    {\ensuremath{\mathsf{#2}(\leftidx{_{#3\!}}{#4}{_{#5}})}\xspace}
+    {\ensuremath{\mathsf{#2}(\leftidx{_{#3\!}}{\cat{#4}}{_{#5}})}\xspace}
 }
-\NewDocumentCommand{\cent}{s O{} m O{}}{\buildCenter{#1}[Z][#2]{#3}[#4]}
+\NewDocumentCommand{\cent}{s o m o}{\buildCenter{#1}[Z][#2]{#3}[#4]}
 \newcommand*{\tcf}[2]{\buildCenter*[Z]{#1}[#2]}
 \newcommand*{\tc}[1]{\tcf{#1}{T}}
 
