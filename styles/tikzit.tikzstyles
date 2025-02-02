@@ -12,14 +12,46 @@
 
 % Edge styles
 \tikzstyle{morphism-edge}=[-, draw=black, thick]
-\tikzstyle{morphism}=[-, draw=black, thick]
 \tikzstyle{cotensor}=[-, draw=gray]
 \tikzstyle{braid-over}=[-, draw=white, thick, double=black, double distance=0.8pt, tikzit draw={rgb,255: red,128; green,0; blue,128}]
-\tikzstyle{purple-over}=[-, draw=white, thick, double={rgb,255:red,102;green,41;blue,163}, double distance=0.8pt, tikzit draw={rgb,255:red,102;green,41;blue,163}]
-\tikzstyle{purple}=[-, draw={rgb,255:red,102;green,41;blue,163}, thick]
-\tikzstyle{blue-under}=[-, draw={rgb,255:red,0;green,128;blue,128}, thick]
+\tikzstyle{ro}=[-, draw=white, thick, double=red, double distance=0.8pt, tikzit draw=red]
+\tikzstyle{bo}=[-, draw=white, thick, double=blue, double distance=0.8pt, tikzit draw=blue]
+\tikzstyle{red}=[-, draw=red, thick]
+\tikzstyle{blue}=[-, draw=blue, thick]
 \tikzstyle{ddd}=[-, draw=black, dash dot dot]
 \tikzstyle{unit}=[-, draw=black, densely dotted]
 \tikzstyle{Front}=[-, draw=black, fill=white, opacity=0.8]
 \tikzstyle{Hidden}=[-, draw=black, fill=white, opacity=0.2]
-\tikzstyle{directed}=[-, thick, black, decoration={markings, mark=at position 0.5 with {\arrow{>={Straight Barb}}}}, postaction=decorate]
+\tikzstyle{directed}=[-, thick, black, decoration={markings, mark=at position 0.5 with {\arrow{>}}}, postaction=decorate]
+\tikzstyle{redblue} = [-,
+  postaction={%
+    decorate,
+    decoration={%
+      markings,
+      mark=between positions 0 and \pgfdecoratedpathlength step 0.5pt with {%
+        \pgfmathsetmacro\myval{multiply(
+          divide(
+          \pgfkeysvalueof{/pgf/decoration/mark info/distance from start}, \pgfdecoratedpathlength
+          ),
+          100
+          )}
+        \pgfsetfillcolor{blue!\myval!red}
+        \pgfpathrectangle{\pgfpoint{-0.4pt}{-0.4pt}}{\pgfpoint{0.8pt}{0.8pt}}
+        \pgfusepath{fill}}
+    }}]
+\tikzstyle{bluered} = [-,
+  postaction={%
+    decorate,
+    decoration={%
+      markings,
+      mark=between positions 0 and \pgfdecoratedpathlength step 0.5pt with {%
+        \pgfmathsetmacro\myval{multiply(
+          divide(
+          \pgfkeysvalueof{/pgf/decoration/mark info/distance from start}, \pgfdecoratedpathlength
+          ),
+          100
+          )}
+        \pgfsetfillcolor{red!\myval!blue}
+        \pgfpathrectangle{\pgfpoint{-0.4pt}{-0.4pt}}{\pgfpoint{0.8pt}{0.8pt}}
+        \pgfusepath{fill}}
+    }}]
