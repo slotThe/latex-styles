@@ -94,7 +94,6 @@
     \usepackage[theoremfont,trueslanted,scosf]{newpxtext}
   \fi
   \usepackage[varqu,varl,scaled=.98]{zi4}% inconsolata for mono, not LibertineMono
-  % \setmonofont{inconsolata}[Scale=MatchLowercase]
   \linespread{1.05}% A bit more leading
   \usepackage{textcomp} % required for special glyphs
   \usepackage[amsthm,upint]{newpxmath} % TODO: play around with smallerops, varg
@@ -171,9 +170,7 @@
 \tikzstyle{none}=[inner sep=0mm]
 % include a .tikz file
 \newcommand{\tikzfig}[1]{{%
-    \ifST@externalize
-      \tikzsetnextfilename{#1}%
-    \fi
+    \ifST@externalize\tikzsetnextfilename{#1}\fi
     \tikzstyle{every picture}=[tikzfig]
     \IfFileExists{#1.tikz}
     {\input{#1.tikz}}
