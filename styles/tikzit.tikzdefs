@@ -1,3 +1,4 @@
+\usepackage{amssymb,amsmath}
 \usetikzlibrary{decorations.markings}
 \newcommand*{\cat}[1]{\ensuremath{\mathcal{#1}}}
 \newcommand*{\id}{\mathrm{id}} % id function
@@ -7,7 +8,6 @@
 \newcommand*{\coloneq}{=:}
 \newcommand*{\defeq}{:=}
 \newcommand*{\nt}{\Longrightarrow}
-\newcommand*{\mathbb}[1]{\mathbf{#1}}
 \newcommand*{\ld}[1]{{}^{\vee}{#1}}
 \newcommand*{\lld}[1]{{}^{\vee\vee}{#1}}
 \newcommand*{\rd}[1]{{#1}^{\vee}}
