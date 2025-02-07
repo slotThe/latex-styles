@@ -20,8 +20,8 @@
 \newcommand*{\ST@poster}{poster}
 \newcommand*{\ST@org}{org}
 
-\DeclareBoolOption{draft}
-\DeclareComplementaryOption{final}{draft}
+\DeclareBoolOption{draft}                   % if explicitly set
+\DeclareComplementaryOption{final}{draft}   % default
 
 \DeclareBoolOption{externalize}
 \DeclareComplementaryOption{noext}{externalize}
@@ -59,10 +59,10 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[tracking=true]{microtype}
-\SetTracking   % Slightly space out small caps
+\SetTracking%   Slightly space out small caps
   {encoding=T1, shape=sc}
   {10}
-\SetProtrusion % Protrude sub- and superscripts at the right margin
+\SetProtrusion% Protrude sub- and superscripts at the right margin
   {encoding=T1,size={7,8}}
   {1={ ,750},2={ ,500},3={ ,500},4={ ,500},5={ ,500},
     6={ ,500},7={ ,600},8={ ,500},9={ ,500},0={ ,500}}
@@ -230,10 +230,9 @@
   % are as bidirectional as possible.
   \newcommand*{\tikzexternalexportnextfalse}{}
   \newcommand*{\tikzsetnextfilename}[1]{}
-  \def\temp{&} \catcode`&=\active \let&=\temp
   \NewEnviron{mytikzcd}[1][]{%
     \begin{tikzcd}[#1]
-      \BODY
+      \BODY%
     \end{tikzcd}
   }
 \fi
@@ -272,11 +271,11 @@
 }
 \usepackage{aligned-overset} % See https://tex.stackexchange.com/questions/257529/overset-and-align-environment-how-to-get-correct-alignment
 
-% The order of loading should be
+% For mostly evil reasons, the order of loading should be
 %
 %     hyperref -> amsthm -> cleveref
 %
-% evil reasons. Interestingly,
+% Interestingly,
 %
 %   https://tex.stackexchange.com/questions/250904/destination-with-the-same-identifier-warning-with-shared-counters-cleveref-an/253694#253694
 %
@@ -287,10 +286,12 @@
   \usepackage{amsthm}
   \usepackage[capitalise, noabbrev]{cleveref}
   \newcommand{\creflastconjunction}{, and~} % I would like my Oxford comma, please.
+  % (Commutative or otherwise) diagrams
   \Crefname{diagram}{Diagram}{Diagrams}
   \Crefformat{diagram}{Diagram~(#2#1#3)}
   \Crefmultiformat{diagram}{Diagrams~(#2#1#3)}{ and~(#2#1#3)}{, (#2#1#3)}{, and~(#2#1#3)}
   \Crefrangeformat{diagram}{Diagrams~(#3#1#4) to~(#5#2#6)}
+  % Hypotheses
   \Crefname{hypothesis}{Hypothesis}{Hypotheses}
   \Crefformat{hypothesis}{Hypothesis~#2#1#3}
   \Crefmultiformat{hypothesis}{Hypotheses~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
@@ -461,7 +462,7 @@
   % \Longrightarrow looks bad there; fix this.
   \DeclareFontFamily{OT1}{cmrx}{}
   \DeclareFontShape{OT1}{cmrx}{m}{n}{<->cmr10}{}
-  \let\saveLongrightarrow\Longrightarrow
+  \let\saveLongrightarrow\Longrightarrow%
   \renewcommand*{\Longrightarrow}{%
     \mathrel{\rlap{\fontfamily{cmrx}\fontencoding{OT1}\selectfont=}%
       \hphantom{\saveLongrightarrow}%
@@ -673,7 +674,7 @@
 \newcommand*{\cotens}{\mathrel{\Box}}
 
 % \mathbb{1} in a font that actually has it.
-\DeclareFontFamily{U}{DSSerif}{\skewchar \font =45}% openface
+\DeclareFontFamily{U}{DSSerif}{\skewchar\font=45}% openface
 \DeclareFontShape{U}{DSSerif}{m}{n}{<-> s*[1]  DSSerif}{}
 \DeclareFontSubstitution{U}{DSSerif}{m}{n}
 \DeclareMathAlphabet{\mathbbbb}{U}{DSSerif}{m}{n}
@@ -701,11 +702,11 @@
   \newcommand{\ST@colon}{:}
 \fi
 \newcommand*{\cocolon}{%
-  \nobreak
+  \nobreak%
   \mskip6mu plus1mu
   \mathpunct{}%
-  \nonscript
-  \mkern-\thinmuskip
+  \nonscript%
+  \mkern-\thinmuskip%
   {\ST@colon}%
   \mskip2mu
   \relax
@@ -729,12 +730,7 @@
 
 %%% Bibliography
 \ifthenelse{\NOT\equal\ST@type\ST@org}{
-  \usepackage[ backend=bibtex
-             , maxnames=4
-             , maxalphanames=4
-             , style=alphabetic
-             , citestyle=alphabetic
-             ]{biblatex}
+  \usepackage[backend=bibtex, maxnames=4, maxalphanames=4, style=alphabetic, citestyle=alphabetic]{biblatex}
   \def\bibfont{\footnotesize}
 }{}
 
