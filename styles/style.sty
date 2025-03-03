@@ -378,6 +378,7 @@
   \theoremstyle{plain}
   \ifthenelse{\equal\ST@type\ST@paper \OR \equal\ST@type\ST@poster}{
     \newtheorem{theorem}{Theorem}
+    \newtheorem*{theorem*}{Theorem}
     \newtheorem{porism}[theorem]{Porism}
     \newtheorem{lemma}[theorem]{Lemma}
     \newtheorem{corollary}[theorem]{Corollary}
@@ -388,7 +389,6 @@
 
   \theoremstyle{definition}
   \ifthenelse{\equal\ST@type\ST@paper \OR \equal\ST@type\ST@poster}{
-    \newtheorem*{theorem*}{Theorem}
     \newtheorem{definition}[theorem]{Definition}
     \newtheorem*{definition*}{Definition}
     \newtheorem{example}[theorem]{Example}
