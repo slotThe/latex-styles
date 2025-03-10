@@ -228,6 +228,7 @@
 \else
   % Create some dummy commands so the `externalize' and `noext' options
   % are as bidirectional as possible.
+  \newcommand*{\tikzexternalize}[1][{}]{}
   \newcommand*{\tikzexternalexportnextfalse}{}
   \newcommand*{\tikzsetnextfilename}[1]{}
   \NewEnviron{mytikzcd}[1][]{%
