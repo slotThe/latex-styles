@@ -532,7 +532,8 @@
 \newcommand*{\lmod}[1]{#1\textnormal{-mod}}
 \newcommand*{\rmod}[1]{\textnormal{mod-}#1}
 \newcommand*{\rMod}[1]{\textnormal{Mod-}#1}
-\newcommand*{\YDM}[1]{\ensuremath{{}^{#1}_{#1}\mathcal{YD}}\xspace}
+\newcommand*{\YDM}[1]{\leftidx{^{#1} _{#1}}{\mathcal{YD}}{}} % left left
+\newcommand*{\aYDM}[1]{\leftidx{^{#1} _{#1}}{\mathsf{a}\mathcal{YD}}{}} % left left
 \newcommand*{\bm}[3]{\ensuremath{{}_{#2}#1_{#3}}}
 \newcommand*{\ltw}[2]{\bm{#1}{\Id_{#1}}{#2}}
 \newcommand*{\lcomod}[1]{#1\textnormal{-comod}}
