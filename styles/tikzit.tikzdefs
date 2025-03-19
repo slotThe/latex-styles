@@ -14,3 +14,5 @@
 \newcommand*{\rrd}[1]{{#1}^{\vee\vee}}
 \newcommand*{\ev}{\mathrm{ev}}
 \newcommand*{\coev}{\mathrm{coev}}
+\newcommand*{\lact}{\triangleright}
+\newcommand*{\ract}{\triangleleft}
