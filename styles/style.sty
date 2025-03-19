@@ -38,6 +38,8 @@
 \DeclareBoolOption{sidenotes}
 \DeclareComplementaryOption{footnotes}{sidenotes}
 
+\DeclareBoolOption[true]{colorlinks}
+
 \DeclareStringOption[normal]{math}
 \edef\DocFont{\ST@math}
 \newcommand*{\ST@normal}{normal}
@@ -283,7 +285,13 @@
 % says this should not work, but it does! This leaves me a bit
 % confused.
 \ifthenelse{\equal\ST@type\ST@paper}{
-  \usepackage[colorlinks, linktoc=page, linkcolor={red}, citecolor={red}, urlcolor={red}]{hyperref}
+  \usepackage[%
+    colorlinks=\ifST@colorlinks true\else false\fi,
+    linktoc=page,
+    linkcolor={red},
+    citecolor={red},
+    urlcolor={red},
+  ]{hyperref}
   \usepackage{amsthm}
   \usepackage[capitalise, noabbrev]{cleveref}
   \newcommand{\creflastconjunction}{, and~} % I would like my Oxford comma, please.
