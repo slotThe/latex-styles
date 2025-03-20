@@ -386,6 +386,15 @@
 %       \subsection*{Acknowledgements}
 \DeclareRobustCommand{\SkipTocEntry}[5]{}
 
+
+%%%% Palatino itemise bullets.
+% Bullets in Palatino are just a tad large for me—at least when they
+% appear in itemize environments. Empirically, this "looks better" than
+% \vcenter{\hbox{\tiny\(\bullet\)}}
+\ifx\ST@font\ST@pal
+  \setlist[itemize]{label=\raisebox{0.25ex}{\tiny\(\bullet\)}}
+\fi
+
 %%%% Maths environments
 \ifthenelse{\NOT\equal\ST@type\ST@org}{
   \theoremstyle{plain}
