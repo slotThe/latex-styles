@@ -360,6 +360,9 @@
 
 %%% Environments
 
+\newlist{thmlist}{enumerate}{1}
+\setlist[thmlist]{label=(\roman{thmlisti})}
+
 %%%% Scale math mode equations
 \newcommand{\scalemath}[2]{\scalebox{#1}{%
     \mbox{\ensuremath{\displaystyle #2}}}%
