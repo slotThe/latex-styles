@@ -4,7 +4,7 @@
 % \tikzstyle{NAME}=[PROPERTY LIST]
 
 % Node styles
-\tikzstyle{whitedot}=[fill=white, draw, shape=circle, scale=0.3, tikzit draw=black, tikzit shape=circle, tikzit fill=white]
+\tikzstyle{whitedot}=[fill=white, draw, shape=circle, scale=0.4, tikzit draw=black, tikzit shape=circle, tikzit fill=white]
 \tikzstyle{blackdot}=[fill=black, draw, shape=circle, scale=0.4, tikzit draw=black, tikzit shape=circle, tikzit fill=black]
 \tikzstyle{bluedot}=[fill=blue, draw=blue, shape=circle, scale=0.4, tikzit draw=blue, tikzit shape=circle, tikzit fill=blue]
 \tikzstyle{box}=[fill=white, draw=black, shape=rectangle, tikzit fill=white]
