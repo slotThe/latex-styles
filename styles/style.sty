@@ -754,7 +754,7 @@
 
 %%% Bibliography
 \ifthenelse{\NOT\equal\ST@type\ST@org}{
-  \usepackage[backend=bibtex, maxnames=5, maxalphanames=5, style=alphabetic, citestyle=alphabetic]{biblatex}
+  \usepackage[backend=bibtex, backref=true, maxnames=5, maxalphanames=5, style=alphabetic, citestyle=alphabetic]{biblatex}
   \def\bibfont{\footnotesize}
   % No quotes around paper title.
   \DeclareFieldFormat*{title}{#1}
