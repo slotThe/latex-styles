@@ -763,10 +763,12 @@
   \DeclareDelimFormat{finalnamedelim}{%
     \ifnumgreater{\value{liststop}}{2}{,}{}%
     \addspace\bibstring{and}\space}
-  % Always use lining numbers for in-text citations. This is essentially
-  % only active when the osf option is used, but with lining-nums it's a
-  % no-op, so we don't have to guard anything.
-  \DeclareFieldFormat{labelalpha}{\liningnums{#1}}
+  % Always use lining numbers for in-text citations.
+  \ifx\ST@font\ST@pal
+    \DeclareFieldFormat{labelalpha}{\liningnums{#1}}
+  \else\ifx\ST@font\ST@lib
+    \DeclareFieldFormat{labelalpha}{\fontfamily{libertinusSerif}\selectfont#1}
+  \fi\fi
 }{}
 
 \endinput
