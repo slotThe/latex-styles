@@ -13,6 +13,7 @@
 
 % Edge styles
 \tikzstyle{morphism-edge}=[-, draw=black, thick]
+\tikzstyle{pole}=[-, draw=black, very thick]
 \tikzstyle{cotensor}=[-, draw=gray]
 \tikzstyle{braid-over}=[-, draw=white, thick, double=black, double distance=0.8pt, tikzit draw={rgb,255: red,128; green,0; blue,128}]
 \tikzstyle{ro}=[-, draw=white, thick, double=red, double distance=0.8pt, tikzit draw=red]
