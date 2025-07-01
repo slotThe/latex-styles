@@ -255,7 +255,28 @@
     visible on/.style={alt={#1{}{invisible}}},
     alt/.code args={<#1>#2#3}{\alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}}}
   }
-}{}
+
+  % Popups that pop!
+  \usetikzlibrary{shapes.callouts}
+  \newcommand*{\here}[1][a]{\tikz[remember picture]\node(#1){};}
+  % A speech bubble-type popup, without the speech bubble pointer if
+  % called in the starred version:
+  %
+  % \popup*<OV>{RECT COORD}{TEXT}
+  % \popup<OV>{RECT COORD}[POINTER COORD]{TEXT}
+  \NewDocumentCommand{\popup}{ s d<> O{west} m O{(0,0)} m }{%
+    \uncover<#2>{%
+      \begin{tikzpicture}[remember picture,overlay]%
+        \path #4 node[%
+        anchor=#3,%
+        {\IfBooleanTF{#1}{rectangle}{rectangle callout}},%
+        fill=block body.bg,%
+        draw=black,%
+        callout absolute pointer={#5}% Ignored for star version
+        ]{#6};%
+      \end{tikzpicture}%
+    }%
+  }}{}
 
 %%%% Todonotes
 \ifST@draft
