@@ -395,7 +395,6 @@
 %       \subsection*{Acknowledgements}
 \DeclareRobustCommand{\SkipTocEntry}[5]{}
 
-
 %%%% Palatino itemise bullets.
 % Bullets in Palatino are just a tad large for me—at least when they
 % appear in itemize environments. Empirically, this "looks better" than
@@ -432,6 +431,21 @@
   \newtheorem*{remark*}{Remark}
   \newtheorem*{convention}{Convention}
   \newtheorem{hypothesis}[theorem]{Hypothesis}
+}{}
+
+%%%% Beamer environments
+
+\ifthenelse{\equal\ST@type\ST@beamer}{%
+  % Like \alt, but don't move the equation if the alternatives have
+  % different sizes. Automatically detects which one is larger.
+  \newcommand<>\Alt[2]{{%
+      \sbox0{\(\displaystyle #1\)}%
+      \sbox1{\(\displaystyle #2\)}%
+      \ifnum\wd0>\wd1%
+        {\alt#3{#1}{\rlap{\(#2\)}{\phantom{#1}}}}%
+      \else%
+        {\alt#3{{\rlap{\(#1\)}{\phantom{#2}}}}{#2}}%
+      \fi}}
 }{}
 
 %%% Commands
