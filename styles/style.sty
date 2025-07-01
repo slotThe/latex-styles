@@ -247,6 +247,16 @@
 \definecolor{red}{RGB}{175, 49, 39}
 \definecolor{green}{RGB}{146, 227, 95}
 
+%%%%% Beamer-specific changes
+
+\ifthenelse{\equal\ST@type\ST@beamer}{%
+  \tikzset{% Revealing parts of a TikZ picture.
+    invisible/.style={opacity=0},
+    visible on/.style={alt={#1{}{invisible}}},
+    alt/.code args={<#1>#2#3}{\alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}}}
+  }
+}{}
+
 %%%% Todonotes
 \ifST@draft
   \usepackage[draft, inline, marginclue, silent, inlineface={\tiny\scshape\color{red}}]{fixme}
