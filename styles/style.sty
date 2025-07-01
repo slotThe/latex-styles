@@ -266,14 +266,11 @@
 \usepackage{rotating}          % \sidewaysfigure
 \usepackage{subfiles}
 \usepackage{xspace}
+\usepackage{enumitem}
 \ifthenelse{\equal\ST@type\ST@beamer \OR \equal\ST@type\ST@poster}{
   \usepackage{qrcode}
 }{}
-\ifthenelse{\NOT\equal\ST@type\ST@beamer}{  % beamer doesn't like these
-  \usepackage{enumitem}
-}{
-  \usepackage{appendixnumberbeamer}
-}
+\ifthenelse{\equal\ST@type\ST@beamer}{\usepackage{appendixnumberbeamer}}{}
 \usepackage{aligned-overset} % See https://tex.stackexchange.com/questions/257529/overset-and-align-environment-how-to-get-correct-alignment
 
 % For mostly evil reasons, the order of loading should be
