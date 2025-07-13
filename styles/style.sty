@@ -263,8 +263,9 @@
   % called in the starred version:
   %
   % \popup*<OV>{RECT COORD}{TEXT}
-  % \popup<OV>{RECT COORD}[POINTER COORD]{TEXT}
+  % \popup<OV>[ANCHOR]{RECT COORD}[POINTER COORD]{TEXT}
   \NewDocumentCommand{\popup}{ s d<> O{west} m O{(0,0)} m }{%
+    \usebeamercolor{block body}%
     \uncover<#2>{%
       \begin{tikzpicture}[remember picture,overlay]%
         \path #4 node[%
@@ -272,6 +273,7 @@
         {\IfBooleanTF{#1}{rectangle}{rectangle callout}},%
         fill=block body.bg,%
         draw=black,%
+        align=center,%
         callout absolute pointer={#5}% Ignored for star version
         ]{#6};%
       \end{tikzpicture}%
