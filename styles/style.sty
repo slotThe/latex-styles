@@ -187,6 +187,34 @@
   }}
 % fix strange self-loops, which are PGF/TikZ default
 \tikzstyle{every loop}=[]
+% Styles
+\ifthenelse{\NOT\equal\ST@type\ST@org}{
+  \input{styles/tikzit.tikzstyles}
+}{
+  % Node styles
+  \tikzstyle{whitedot}=[fill=white, draw, shape=circle, scale=0.4, tikzit draw=black, tikzit shape=circle, tikzit fill=white]
+  \tikzstyle{smallwhitedot}=[fill=white, draw, shape=circle, scale=0.2, tikzit draw=black, tikzit shape=circle, tikzit fill=white]
+  \tikzstyle{blackdot}=[fill=black, draw, shape=circle, scale=0.4, tikzit draw=black, tikzit shape=circle, tikzit fill=black]
+  \tikzstyle{bluedot}=[fill=blue, draw=blue, shape=circle, scale=0.4, tikzit draw=blue, tikzit shape=circle, tikzit fill=blue]
+  \tikzstyle{box}=[fill=white, draw=black, shape=rectangle, tikzit fill=white]
+  \tikzstyle{BL}=[draw=black, shape=circle, fill=black, scale=0.3]
+  \tikzstyle{PP}=[draw={rgb,255:red,102;green,41;blue,163}, shape=circle, fill={rgb,255:red,102;green,41;blue,163}, scale=0.3]
+  % Edge styles
+  \tikzstyle{morphism-edge}=[-, draw=black, thick]
+  \tikzstyle{pole}=[-, draw=black, very thick]
+  \tikzstyle{cotensor}=[-, draw=gray]
+  \tikzstyle{braid-over}=[-, draw=white, thick, double=black, double distance=0.8pt, tikzit draw={rgb,255: red,128; green,0; blue,128}]
+  \tikzstyle{ro}=[-, draw=white, thick, double=red, double distance=0.8pt, tikzit draw=red]
+  \tikzstyle{bo}=[-, draw=white, thick, double=blue, double distance=0.8pt, tikzit draw=blue]
+  \tikzstyle{red}=[-, draw=red, thick]
+  \tikzstyle{blue}=[-, draw=blue, thick]
+  \tikzstyle{ddd}=[-, draw=black, dash dot dot]
+  \tikzstyle{unit}=[-, draw=black, densely dotted]
+  \tikzstyle{Front}=[-, draw=black, fill=white, opacity=0.8]
+  \tikzstyle{CALAH}=[-, draw=black, fill=gray, opacity=0.8]
+  \tikzstyle{Hidden}=[-, draw=black, fill=white, opacity=0.2]
+  \tikzstyle{directed}=[-, thick, black, decoration={markings, mark=at position 0.5 with {\arrow{>}}}, postaction=decorate]
+}
 
 %%%%% quiver.sty for q.uiver.app
 % `amssymb` is necessary for `\lrcorner` and `\ulcorner`.
@@ -217,10 +245,12 @@
 \tikzset{2tail reversed/.code={\pgfsetarrowsstart{Implies}}}
 % TikZ arrow styles.
 \tikzset{no body/.style={/tikz/dash pattern=on 0 off 1mm}}
-
-\ifthenelse{\NOT\equal\ST@type\ST@org}{
-  \input{styles/tikzit.tikzstyles}
-}{}
+% A TikZ style for shortening paths without the poor behaviour of
+% `shorten <' and `shorten >'.
+\usetikzlibrary{spath3}% `spath3` is necessary to draw shortened edges.
+\tikzset{between/.style n args={2}{/tikz/spath/at end path construction={
+    \tikzset{spath/split at keep middle={current}{#1}{#2}}
+}}}
 
 %%%%% Externalisation
 \ifST@externalize
