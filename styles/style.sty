@@ -289,7 +289,7 @@
 
   % Popups that pop!
   \usetikzlibrary{shapes.callouts}
-  \newcommand*{\here}[1][a]{\tikz[remember picture]\node(#1){};}
+  \newcommand*{\here}[1][a]{\makebox[0pt]{\tikz[remember picture]\node(#1){};}}
   % A speech bubble-type popup, without the speech bubble pointer if
   % called in the starred version:
   %
